@@ -1,4 +1,12 @@
+<div class="conversations-list">
+  <ul>
+  <% User.where.not(id: current_user.id).each do |user| %>
+    <li><%= link_to user.username, conversations_path(target_id: user.id), method: :post %></li>
+  <% end %>
+  </ul>
+</div>
+
 <div class="message-wr">
-  <%= render 'messages' %>
+  <%= render partial: 'messages', locals: { messages: @messages } %>
   <%= render 'message_form' %>
 </div>

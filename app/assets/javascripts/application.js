@@ -14,3 +14,23 @@
 //= require jquery_ujs
 //= require turbolinks
 //= require_tree .
+var scroll_bottom, submit_message;
+
+$(document).on('turbolinks:load', function() {
+  submit_message();
+  return scroll_bottom();
+});
+
+submit_message = function() {
+  return $('#message_content').on('keydown', function(event) {
+    if (event.keyCode === 13) {
+      $('input').click();
+      event.target.value = "";
+      return event.preventDefault();
+    }
+  });
+};
+
+scroll_bottom = function() {
+  return $('#messages').scrollTop($('#messages')[0].scrollHeight);
+};

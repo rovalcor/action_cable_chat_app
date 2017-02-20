@@ -6,6 +6,11 @@ class Conversation < ApplicationRecord
   end
 
   def target
-    @taget ||= User.find(target_id)
+    @target ||= User.find(target_id)
+  end
+
+  def self.find_by_participants(user_a_id, user_b_id)
+    Conversation.where(creator_id: user_a_id, target_id: user_b_id)
+                .or(Conversation.where(creator_id: user_b_id, target_id: user_a_id)).first
   end
 end
