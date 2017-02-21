@@ -1,10 +1,10 @@
 Rails.application.routes.draw do
-  root 'messages#index'
+  root 'conversations#index'
   resources :users
   resources :messages
-  resources :conversations, only: [:show, :create] do
+  resources :conversations do
     member do
-      post 'message' => 'conversations#create_message' 
+      post 'message' => 'conversations#send_message'
     end
   end
   get    '/login',   to: 'sessions#new'

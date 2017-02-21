@@ -1,16 +1,8 @@
 class Conversation < ApplicationRecord
   has_many :messages
 
-  def creator
-    @creator ||= User.find(creator_id)
-  end
-
-  def target
-    @target ||= User.find(target_id)
-  end
-
-  def self.find_by_participants(user_a_id, user_b_id)
-    Conversation.where(creator_id: user_a_id, target_id: user_b_id)
-                .or(Conversation.where(creator_id: user_b_id, target_id: user_a_id)).first
+  def self.find_by_participants(user_1_id, user_2_id)
+    Conversation.where(creator_id: user_1_id, target_id: user_2_id)
+                .or(Conversation.where(creator_id: user_2_id, target_id: user_1_id)).first
   end
 end

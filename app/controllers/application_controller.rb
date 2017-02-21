@@ -1,7 +1,8 @@
 class ApplicationController < ActionController::Base
+  include SessionsHelper
+
   before_action :logged_in_user
   protect_from_forgery with: :exception
-  include SessionsHelper
 
     # Confirms a logged-in user.
     def logged_in_user

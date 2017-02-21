@@ -1,14 +1,7 @@
 <div class="hidden" id="con-data" data-conversation-id="<%= @conversation.id %>"/>
-<div class="conversations-list">
-  <ul>
-  <% User.where.not(id: current_user.id).each do |user| %>
-    <li><%= link_to user.username, conversations_path(target_id: user.id), method: :post %></li>
-  <% end %>
-  </ul>
-</div>
 
 <div class="message-wr">
-  <%= render partial: 'messages/messages', locals: { messages: @conversation.messages } %>
+  <%= render partial: 'messages/messages', locals: { messages: @conversation.messages.for_display } %>
   <div class="message-input">
     <%= form_tag message_conversation_path(@conversation), remote: true do %>
       <%= text_area_tag :content %>

@@ -1,5 +1,8 @@
 class ConversationsController < ApplicationController
-  before_action :set_conversation, except: :create
+  before_action :set_conversation, except: [:index, :create]
+
+  def index
+  end
 
   def create
     @conversation = Conversation.find_by_participants(current_user.id, params[:target_id])
@@ -18,7 +21,7 @@ class ConversationsController < ApplicationController
     end
   end
 
-  def create_message
+  def send_message
     @message = current_user.messages.build
     @message.content = params[:content]
     @message.conversation = @conversation
@@ -42,5 +45,6 @@ class ConversationsController < ApplicationController
 
   def set_conversation
     @conversation = current_user.conversations.find(params[:id])
+    @message = current_user.messages.build
   end
 end

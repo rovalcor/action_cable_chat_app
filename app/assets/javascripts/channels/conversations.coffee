@@ -13,7 +13,8 @@ submit_message = () ->
       event.preventDefault()
 
 scroll_bottom = () ->
-  $('#messages').scrollTop($('#messages')[0].scrollHeight)
+  if $('#messages').length
+    $('#messages').scrollTop($('#messages')[0].scrollHeight)
 
 MakeConversationsChannel = (conversation_id) ->
   App.conversations = App.cable.subscriptions.create { channel: "ConversationsChannel", conversation_id: conversation_id },
